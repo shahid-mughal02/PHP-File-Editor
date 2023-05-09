@@ -10,6 +10,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['filename'])) {
     $filename = $_POST['filename'];
     $path = "../" . $filename;
     $file_contents = $_POST['file_contents'];
-    $filepath = ".../" . $file_contents;
-    file_put_contents($path, $filepath);
+    file_put_contents($path, $file_contents);
 }

@@ -11,17 +11,17 @@
 
 <body>
     <div id="file-editor">
-        <div class="editor">
+        <div class="editor-box">
             <select class="select-file" id="selected-file">
-                <option value="sitemap.xml">SITEMAP</option>
-                <option value="robots.txt">ROBOTS</option>
-                <option value=".htaccess">.HTACCESS</option>
+                <option value="content.txt">Content.txt</option>
+                <option value="info.html">Info.html</option>
+                <option value="alert.php">Alert.php</option>
             </select>
             <textarea id="editor" rows="20" title="You need to save the file to preview"></textarea>
             <button id="save-button">Save</button>
         </div>
         <div class="preview-box">
-            <h3>File Preview</h3>
+            <h3 class="preview-title">File Preview</h3>
             <div id="file-preview"></div>
         </div>
     </div>

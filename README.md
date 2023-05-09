@@ -1,5 +1,5 @@
 # PHP File Editor
-> You can edit any kind of file without reload the page.
+> You can edit any kind of file without reloading the page.
 
 ## Developed using the following:
 - [x] HTML
