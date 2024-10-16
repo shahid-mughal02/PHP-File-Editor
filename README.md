@@ -8,6 +8,8 @@
 - [x] PHP
 
 ## Features:
-- [x] Can edit file
-- [x] Can preview file
-- [x] Can select any file
+- [x] Create file
+- [x] Edit file
+- [x] Delete file
+- [x] Preview file
+- [x] Select any file

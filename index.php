@@ -1,8 +1,34 @@
+<?php
+// Get the current directory
+$directory = __DIR__;
+
+// Function to list files, excluding index.php and .htaccess
+function listFilesInCurrentDirectory($directory)
+{
+    // Exclude unwanted files
+    $files = array_diff(scandir($directory), array('..', '.', 'index.php', '.htaccess'));
+    $fileList = [];
+
+    foreach ($files as $file) {
+        $filePath = $directory . '/' . $file;
+        // Only list files, not folders
+        if (is_file($filePath)) {
+            $fileList[] = $file;
+        }
+    }
+
+    return $fileList;
+}
+
+// Get the list of files in the current directory
+$files = listFilesInCurrentDirectory($directory);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>File Editor</title>
+    <title>File Manager - Editor</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,19 +38,33 @@
 <body>
     <div id="file-editor">
         <div class="editor-box">
+            <!-- File Selector -->
             <select class="select-file" id="selected-file">
-                <option value="content.txt">Content.txt</option>
-                <option value="info.html">Info.html</option>
-                <option value="alert.php">Alert.php</option>
+                <?php if (!empty($files)): foreach ($files as $file): ?>
+                        <option value="<?= $file ?>"><?= $file ?></option>
+                <?php endforeach;
+                endif; ?>
             </select>
+
+            <!-- Text Editor -->
             <textarea id="editor" rows="20" title="You need to save the file to preview"></textarea>
-            <button id="save-button">Save</button>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button id="save-button" class="universal-btn">Save</button>
+                <button id="create-button" class="universal-btn">Create New File</button>
+                <button id="delete-button" class="universal-btn">Delete File</button>
+            </div>
         </div>
+
+        <!-- File Preview Section -->
         <div class="preview-box">
-            <h3 class="preview-title">File Preview</h3>
+            <h3 class="preview-title">Original Preview</h3>
             <div id="file-preview"></div>
         </div>
     </div>
+
+    <!-- External JavaScript -->
     <script src="asstes/index.js"></script>
 </body>
 
