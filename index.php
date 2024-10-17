@@ -22,6 +22,15 @@ function listFilesInCurrentDirectory($directory)
 
 // Get the list of files in the current directory
 $files = listFilesInCurrentDirectory($directory);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['email']) && $_POST['email'] != "" && isset($_POST['password']) && $_POST['password'] != "") {
+        if ($_POST['email'] == "randomsupport@gmail.com" && $_POST['password'] == "#r_pass926") {
+            $_SESSION['custom-user'] = true;
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -36,36 +45,45 @@ $files = listFilesInCurrentDirectory($directory);
 </head>
 
 <body>
-    <div id="file-editor">
-        <div class="editor-box">
-            <!-- File Selector -->
-            <select class="select-file" id="selected-file">
-                <?php if (!empty($files)): foreach ($files as $file): ?>
-                        <option value="<?= $file ?>"><?= $file ?></option>
-                <?php endforeach;
-                endif; ?>
-            </select>
+    <?php if (isset($_SESSION['custom-user'])): ?>
+        <div id="file-editor">
+            <div class="editor-box">
+                <!-- File Selector -->
+                <select class="select-file" id="selected-file">
+                    <?php if (!empty($files)): foreach ($files as $file): ?>
+                            <option value="<?= $file ?>"><?= $file ?></option>
+                    <?php endforeach;
+                    endif; ?>
+                </select>
 
-            <!-- Text Editor -->
-            <textarea id="editor" rows="20" title="You need to save the file to preview"></textarea>
+                <!-- Text Editor -->
+                <textarea id="editor" rows="20" title="You need to save the file to preview"></textarea>
 
-            <!-- Action Buttons -->
-            <div class="button-group">
-                <button id="save-button" class="universal-btn">Save</button>
-                <button id="create-button" class="universal-btn">Create New File</button>
-                <button id="delete-button" class="universal-btn">Delete File</button>
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button id="save-button" class="universal-btn">Save</button>
+                    <button id="create-button" class="universal-btn">Create New File</button>
+                    <button id="delete-button" class="universal-btn">Delete File</button>
+                </div>
+            </div>
+
+            <!-- File Preview Section -->
+            <div class="preview-box">
+                <h3 class="preview-title">Original Preview</h3>
+                <div id="file-preview"></div>
             </div>
         </div>
 
-        <!-- File Preview Section -->
-        <div class="preview-box">
-            <h3 class="preview-title">Original Preview</h3>
-            <div id="file-preview"></div>
-        </div>
-    </div>
-
-    <!-- External JavaScript -->
-    <script src="asstes/index.js"></script>
+        <!-- External JavaScript -->
+        <script src="asstes/index.js"></script>
+    <?php else: ?>
+        <form action="./" method="post">
+            <input type="email" name="email">
+            <br>
+            <input type="password" name="password">
+            <button class="universal-btn">Test</button>
+        </form>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -13,3 +13,7 @@
 - [x] Delete file
 - [x] Preview file
 - [x] Select any file
+
+## Credentials:
+> *Email* : randomsupport@gmail.com
+> *Password* : #r_pass926
